@@ -47,34 +47,60 @@
   --font-display-lg: "Source Serif 4", serif;
   --font-body-lg: "Plus Jakarta Sans", sans-serif;
   --font-label-md: "Plus Jakarta Sans", sans-serif;
+  --font-label-lg: "Plus Jakarta Sans", sans-serif;
   --font-body-md: "Plus Jakarta Sans", sans-serif;
   --font-headline-md: "Source Serif 4", serif;
 
   --text-headline-sm: 24px;
   --text-headline-sm--line-height: 32px;
   --text-headline-sm--font-weight: 600;
-  
+
   --text-display-lg: 56px;
   --text-display-lg--line-height: 64px;
   --text-display-lg--letter-spacing: -0.02em;
   --text-display-lg--font-weight: 700;
-  
+
   --text-body-lg: 18px;
   --text-body-lg--line-height: 28px;
   --text-body-lg--font-weight: 400;
-  
+
   --text-label-md: 14px;
   --text-label-md--line-height: 20px;
   --text-label-md--letter-spacing: 0.05em;
   --text-label-md--font-weight: 600;
-  
+
+  --text-label-lg: 16px;
+  --text-label-lg--line-height: 22px;
+  --text-label-lg--font-weight: 700;
+
   --text-body-md: 16px;
   --text-body-md--line-height: 24px;
   --text-body-md--font-weight: 400;
-  
+
   --text-headline-md: 32px;
   --text-headline-md--line-height: 40px;
   --text-headline-md--font-weight: 600;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-track {
+    animation: none !important;
+  }
+}
+
+/* Responsive display type: 56px is too large on small phones */
+@media (max-width: 480px) {
+  .text-display-lg {
+    font-size: 40px;
+    line-height: 48px;
+  }
 }
 
 @layer utilities {
@@ -85,18 +111,39 @@
   .animate-fade-in-up {
     animation: fadeInUp 0.8s ease-out forwards;
   }
-  .reveal-on-scroll {
-    opacity: 0;
+
+  /* Infinite marquee (track contains two identical copies) */
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
-  .reveal-on-scroll.visible {
-    animation: fadeInUp 0.8s ease-out forwards;
+  .marquee-track {
+    animation: marquee 28s linear infinite;
   }
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  /* Diagonal light sweep on hover for menu cards */
+  .shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.35) 50%,
+      transparent 60%
+    );
+    transform: translateX(-120%);
+    transition: transform 0.9s ease;
+    z-index: 2;
+  }
+  .group:hover .shine {
+    transform: translateX(120%);
+  }
+
   .custom-shadow {
     box-shadow: 0 10px 30px -5px rgba(148, 74, 0, 0.08);
-  }
-  .menu-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px -10px rgba(148, 74, 0, 0.12);
   }
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
@@ -104,5 +151,11 @@
   .hide-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
