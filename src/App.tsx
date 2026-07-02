@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   motion,
   useScroll,
@@ -27,7 +27,9 @@ import {
   Users,
   CreditCard,
   X,
-  Instagram
+  Instagram,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 /* ------------------------------------------------------------------ */
@@ -256,7 +258,7 @@ function TiltCard({ children, className }: { children: React.ReactNode; classNam
   );
 }
 
-function FAQItem({ question, answer }: { question: string; answer: string }) {
+function FAQItem({ question, answer }: { question: string; answer: string; key?: React.Key }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -417,6 +419,16 @@ export default function App() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
 
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDark]);
+
   const { scrollY, scrollYProgress } = useScroll();
   const heroY = useTransform(scrollY, [0, 1000], [0, 300]);
   const heroScale = useTransform(scrollY, [0, 1000], [1, 1.2]);
@@ -517,6 +529,13 @@ export default function App() {
 
           <div className="flex items-center gap-3">
             <StatusPill className="hidden lg:inline-flex" />
+            <button
+              onClick={() => setIsDark(!isDark)}
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant/50 text-on-surface hover:bg-surface-container-high transition-colors"
+              aria-label="Toggle theme"
+            >
+              {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
             <a
               href={whatsAppOrderLink()}
               target="_blank"
@@ -828,11 +847,11 @@ export default function App() {
                     <motion.div
                       key={dish.title}
                       layout
-                      initial={{ opacity: 0, y: 40, scale: 0.96 }}
+                      initial={{ opacity: 0, y: 50, scale: 0.98 }}
                       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.94 }}
-                      viewport={{ once: true, margin: '-60px' }}
-                      transition={{ duration: 0.55, delay: (index % 3) * 0.1 }}
+                      exit={{ opacity: 0, scale: 0.96 }}
+                      viewport={{ once: true, margin: '-50px' }}
+                      transition={{ duration: 0.6, delay: (index % 3) * 0.15, ease: 'easeOut' }}
                       className="md:col-span-4 h-80"
                     >
                       <TiltCard className="h-full">
