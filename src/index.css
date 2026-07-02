@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-inverse-surface: #34302c;
+  --color-outline-variant: #dcc1b1;
+  --color-outline: #897365;
+  --color-surface-variant: #e9e1dc;
+  --color-surface-bright: #fff8f5;
+  --color-primary-container: #e67e22;
+  --color-on-background: #1e1b18;
+  --color-surface-container-high: #efe6e2;
+  --color-secondary: #984636;
+  --color-primary: #944a00;
+  --color-secondary-container: #ff9783;
+  --color-on-error: #ffffff;
+  --color-error: #ba1a1a;
+  --color-background: #fff8f5;
+  --color-on-primary: #ffffff;
+  --color-on-surface: #1e1b18;
+  --color-surface-container: #f5ece7;
+  --color-on-surface-variant: #564337;
+  --color-on-secondary: #ffffff;
+  --color-surface-dim: #e1d8d4;
+  --color-on-secondary-container: #782d20;
+  --color-surface: #fff8f5;
+  --color-surface-container-highest: #e9e1dc;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-primary-container: #502600;
+  --color-surface-container-low: #fbf2ed;
+  --color-tertiary-container: #9b9994;
+  --color-on-tertiary-container: #32312e;
+  --color-on-secondary-fixed-variant: #7a2f21;
+
+  --radius-DEFAULT: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+
+  --spacing-gutter: 24px;
+  --spacing-margin-mobile: 16px;
+  --spacing-margin-desktop: 40px;
+  --spacing-container-max: 1200px;
+  --spacing-base: 8px;
+
+  --font-headline-sm: "Source Serif 4", serif;
+  --font-display-lg: "Source Serif 4", serif;
+  --font-body-lg: "Plus Jakarta Sans", sans-serif;
+  --font-label-md: "Plus Jakarta Sans", sans-serif;
+  --font-body-md: "Plus Jakarta Sans", sans-serif;
+  --font-headline-md: "Source Serif 4", serif;
+
+  --text-headline-sm: 24px;
+  --text-headline-sm--line-height: 32px;
+  --text-headline-sm--font-weight: 600;
+  
+  --text-display-lg: 56px;
+  --text-display-lg--line-height: 64px;
+  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-lg--font-weight: 700;
+  
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 28px;
+  --text-body-lg--font-weight: 400;
+  
+  --text-label-md: 14px;
+  --text-label-md--line-height: 20px;
+  --text-label-md--letter-spacing: 0.05em;
+  --text-label-md--font-weight: 600;
+  
+  --text-body-md: 16px;
+  --text-body-md--line-height: 24px;
+  --text-body-md--font-weight: 400;
+  
+  --text-headline-md: 32px;
+  --text-headline-md--line-height: 40px;
+  --text-headline-md--font-weight: 600;
+}
+
+@layer utilities {
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  .reveal-on-scroll {
+    opacity: 0;
+  }
+  .reveal-on-scroll.visible {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  .custom-shadow {
+    box-shadow: 0 10px 30px -5px rgba(148, 74, 0, 0.08);
+  }
+  .menu-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px -10px rgba(148, 74, 0, 0.12);
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
